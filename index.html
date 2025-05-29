@@ -1184,52 +1184,79 @@
         });
       });
 
-      // Form submission handling with enhanced validation
+      // Form submission handling with enhanced validation - Reemplazar la función de validación del formulario en index.html
       document
         .getElementById("contactForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          // Get form data
           const formData = new FormData(this);
 
-          // Validación básica en el frontend
+          // Validaciones mejoradas
           const nombre = formData.get("nombre").trim();
           const contacto = formData.get("contacto").trim();
           const email = formData.get("email").trim();
+          const telefono = formData.get("telefono").trim();
           const mensaje = formData.get("mensaje").trim();
 
-          if (!nombre || !contacto || !email || !mensaje) {
-            alert("Por favor completa todos los campos obligatorios.");
+          // Validaciones específicas
+          if (nombre.length < 2) {
+            alert("El nombre de la empresa debe tener al menos 2 caracteres.");
             return;
           }
 
-          // Email validation
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (contacto.length < 2) {
+            alert("El nombre de contacto debe tener al menos 2 caracteres.");
+            return;
+          }
+
+          // Validación de email más robusta
+          const emailRegex =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
           if (!emailRegex.test(email)) {
             alert("Por favor ingresa un correo electrónico válido.");
             return;
           }
 
-          // Elementos del formulario
+          // Validación de teléfono (opcional)
+          if (telefono && !/^[\+]?[0-9\s\-\(\)]{7,15}$/.test(telefono)) {
+            alert("El formato del teléfono no es válido.");
+            return;
+          }
+
+          if (mensaje.length < 10) {
+            alert("El mensaje debe tener al menos 10 caracteres.");
+            return;
+          }
+
           const submitBtn = this.querySelector(".submit-btn");
           const originalText = submitBtn.textContent;
 
-          // Estado de carga
+          // Estado de carga mejorado
           submitBtn.classList.add("loading");
-          submitBtn.textContent = "Enviando consulta...";
+          submitBtn.innerHTML = "<span>Enviando consulta...</span>";
           submitBtn.disabled = true;
 
-          // Enviar datos al servidor
+          // Enviar con timeout
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 segundos
+
           fetch("api/procesar_contacto.php", {
             method: "POST",
             body: formData,
+            signal: controller.signal,
           })
-            .then((response) => response.json())
+            .then((response) => {
+              clearTimeout(timeoutId);
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
             .then((data) => {
               if (data.success) {
                 alert(
-                  "¡Excelente! Hemos recibido tu consulta. Nuestro equipo de especialistas te contactará en las próximas 24 horas para agendar una reunión inicial gratuita y evaluar las oportunidades de mejora en tu empresa."
+                  "¡Excelente! Hemos recibido tu consulta. Nuestro equipo de especialistas te contactará en las próximas 24 horas."
                 );
                 this.reset();
               } else {
@@ -1237,15 +1264,21 @@
               }
             })
             .catch((error) => {
+              clearTimeout(timeoutId);
               console.error("Error:", error);
-              alert(
-                "Hubo un error al enviar tu consulta. Por favor intenta nuevamente."
-              );
+              if (error.name === "AbortError") {
+                alert(
+                  "La solicitud tardó demasiado. Por favor intenta nuevamente."
+                );
+              } else {
+                alert(
+                  "Hubo un error al enviar tu consulta. Por favor intenta nuevamente."
+                );
+              }
             })
             .finally(() => {
-              // Restaurar botón
               submitBtn.classList.remove("loading");
-              submitBtn.textContent = originalText;
+              submitBtn.innerHTML = originalText;
               submitBtn.disabled = false;
             });
         });
