@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProConsult - Consultoría Empresarial Especializada</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-blue: #1e40af;
+        --secondary-blue: #3b82f6;
+        --light-blue: #60a5fa;
+        --electric-blue: #2563eb;
+        --dark-blue: #1e3a8a;
+        --navy-blue: #0f172a;
+        --glow-blue: #06b6d4;
+        --accent-cyan: #0891b2;
+      }
+
+      body {
+        font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #334155;
+        overflow-x: hidden;
+        background: var(--navy-blue);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--navy-blue) 0%,
+          var(--dark-blue) 50%,
+          var(--primary-blue) 100%
+        );
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3);
+        border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--glow-blue),
+          var(--light-blue),
+          var(--electric-blue)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+        position: relative;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--glow-blue), transparent);
+        border-radius: 2px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        font-weight: 500;
+        padding: 0.5rem 0;
+      }
+
+      .nav-links a:hover {
+        color: var(--glow-blue);
+        transform: translateY(-2px);
+        text-shadow: 0 0 20px rgba(6, 182, 212, 0.6);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--glow-blue), var(--light-blue));
+        transition: width 0.4s ease;
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+          135deg,
+          var(--navy-blue) 0%,
+          var(--dark-blue) 30%,
+          var(--primary-blue) 70%,
+          var(--electric-blue) 100%
+        );
+        color: white;
+        padding: 140px 0 100px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 20% 50%,
+            rgba(6, 182, 212, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(59, 130, 246, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(37, 99, 235, 0.1) 0%,
+            transparent 50%
+          );
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(30px, -30px) rotate(120deg);
+        }
+        66% {
+          transform: translate(-20px, 20px) rotate(240deg);
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        font-weight: 900;
+        background: linear-gradient(
+          135deg,
+          white,
+          var(--glow-blue),
+          var(--light-blue)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: slideInDown 1s ease;
+        text-shadow: 0 0 40px rgba(6, 182, 212, 0.3);
+      }
+
+      .hero p {
+        font-size: 1.4rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.95;
+        animation: slideInUp 1s ease 0.3s both;
+        line-height: 1.8;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(
+          135deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        color: white;
+        padding: 18px 40px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+        animation: slideInUp 1s ease 0.6s both;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 25px 50px rgba(6, 182, 212, 0.4);
+        background: linear-gradient(
+          135deg,
+          var(--electric-blue),
+          var(--glow-blue)
+        );
+      }
+
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-60px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(60px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Services Section */
+      .services {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        position: relative;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 4rem;
+        color: var(--navy-blue);
+        position: relative;
+        font-weight: 800;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        border-radius: 2px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+        margin-top: 4rem;
+      }
+
+      .service-card {
+        background: linear-gradient(145deg, white, #f8fafc);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(30, 64, 175, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(96, 165, 250, 0.1);
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 30px 60px rgba(30, 64, 175, 0.2);
+        border-color: rgba(96, 165, 250, 0.3);
+      }
+
+      .service-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+      }
+
+      .service-card h3 {
+        font-size: 1.6rem;
+        margin-bottom: 1.2rem;
+        color: var(--navy-blue);
+        font-weight: 700;
+      }
+
+      .service-card p {
+        color: #64748b;
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+
+      /* Industries Section */
+      .industries {
+        padding: 100px 0;
+        background: linear-gradient(
+          135deg,
+          var(--navy-blue) 0%,
+          var(--dark-blue) 50%,
+          var(--primary-blue) 100%
+        );
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .industries::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 30% 40%,
+            rgba(6, 182, 212, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 70% 60%,
+            rgba(59, 130, 246, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .industries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2.5rem;
+        margin-top: 4rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .industry-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2.5rem;
+        border-radius: 20px;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .industry-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(6, 182, 212, 0.1),
+          rgba(59, 130, 246, 0.1)
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .industry-card:hover::before {
+        opacity: 1;
+      }
+
+      .industry-card:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 25px 50px rgba(6, 182, 212, 0.2);
+        border-color: rgba(96, 165, 250, 0.4);
+      }
+
+      .industry-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--glow-blue);
+        text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+      }
+
+      .industry-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      /* Solutions Section */
+      .solutions {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #f1f5f9 0%, white 100%);
+      }
+
+      .solutions-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .solutions-content h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        color: var(--navy-blue);
+        font-weight: 800;
+      }
+
+      .solutions-list {
+        list-style: none;
+      }
+
+      .solutions-list li {
+        padding: 1.2rem 0;
+        border-bottom: 1px solid #e2e8f0;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        padding-left: 3rem;
+        font-size: 1.1rem;
+        color: #475569;
+      }
+
+      .solutions-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--glow-blue);
+        font-weight: bold;
+        font-size: 1.4rem;
+        background: linear-gradient(
+          135deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .solutions-list li:hover {
+        background: linear-gradient(
+          90deg,
+          rgba(6, 182, 212, 0.05),
+          transparent
+        );
+        padding-left: 3.5rem;
+        color: var(--dark-blue);
+        transform: translateX(10px);
+      }
+
+      .solutions-visual {
+        background: linear-gradient(
+          135deg,
+          var(--navy-blue) 0%,
+          var(--dark-blue) 50%,
+          var(--primary-blue) 100%
+        );
+        border-radius: 25px;
+        padding: 3rem;
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(30, 64, 175, 0.3);
+      }
+
+      .solutions-visual::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(6, 182, 212, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .solutions-visual h3 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .metric {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        position: relative;
+        z-index: 2;
+        transition: all 0.3s ease;
+      }
+
+      .metric:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.05);
+      }
+
+      .metric-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--glow-blue);
+        text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 100px 0;
+        background: linear-gradient(
+          135deg,
+          var(--navy-blue) 0%,
+          var(--dark-blue) 100%
+        );
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(6, 182, 212, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 75% 75%,
+            rgba(59, 130, 246, 0.1) 0%,
+            transparent 50%
+          );
+      }
+
+      .contact-form {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+
+      .form-group {
+        margin-bottom: 2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        color: var(--glow-blue);
+        font-size: 1.1rem;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 1.2rem;
+        border: none;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(96, 165, 250, 0.2);
+        transition: all 0.4s ease;
+        font-size: 1rem;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--glow-blue);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .submit-btn {
+        background: linear-gradient(
+          135deg,
+          var(--glow-blue),
+          var(--electric-blue)
+        );
+        color: white;
+        padding: 18px 40px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+      }
+
+      .submit-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.6s;
+      }
+
+      .submit-btn:hover::before {
+        left: 100%;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(6, 182, 212, 0.4);
+        background: linear-gradient(
+          135deg,
+          var(--electric-blue),
+          var(--glow-blue)
+        );
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--navy-blue);
+        color: white;
+        text-align: center;
+        padding: 3rem 0;
+        border-top: 1px solid rgba(96, 165, 250, 0.2);
+      }
+
+      .footer p {
+        opacity: 0.8;
+        font-size: 1rem;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: linear-gradient(
+            135deg,
+            var(--navy-blue),
+            var(--dark-blue)
+          );
+          flex-direction: column;
+          padding: 2rem;
+          gap: 1rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .solutions-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+
+        .services-grid,
+        .industries-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Scroll animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Floating particles animation */
+      .particle {
+        position: absolute;
+        background: var(--glow-blue);
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.6;
+        animation: floatUp 4s linear infinite;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.6;
+        }
+        90% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(-100px) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Loading animation */
+      .loading {
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid var(--glow-blue);
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav container">
+        <div class="logo">ProConsult</div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#industrias">Industrias</a></li>
+          <li><a href="#soluciones">Soluciones</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Transformamos tu Empresa</h1>
+          <p>
+            Consultoría especializada en análisis, diagnóstico y soluciones
+            avanzadas para optimizar costos, incrementar productividad y mejorar
+            indicadores empresariales con tecnología de vanguardia
+          </p>
+          <a href="#contacto" class="cta-button">Solicitar Consulta Gratuita</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+      <div class="container">
+        <h2 class="section-title fade-in">Nuestros Servicios Especializados</h2>
+        <div class="services-grid">
+          <div class="service-card fade-in">
+            <div class="service-icon">📊</div>
+            <h3>Análisis de Costos Avanzado</h3>
+            <p>
+              Evaluamos y optimizamos exhaustivamente los costos de producción
+              mediante metodologías comprobadas, identificando oportunidades de
+              reducción del 20-40% sin comprometer la calidad del producto
+              final.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">📈</div>
+            <h3>Sistemas de KPIs Inteligentes</h3>
+            <p>
+              Diseñamos e implementamos dashboards de indicadores personalizados
+              con análisis predictivo para monitorear rendimiento en tiempo real
+              y facilitar decisiones estratégicas basadas en datos.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">👥</div>
+            <h3>Gestión de Talento Humano</h3>
+            <p>
+              Optimizamos la gestión del capital humano mediante evaluación de
+              competencias, planes de desarrollo y estrategias de retención que
+              incrementan la productividad hasta un 45%.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">💻</div>
+            <h3>Soluciones Digitales Personalizadas</h3>
+            <p>
+              Desarrollamos sistemas y aplicaciones a medida para automatizar
+              procesos críticos, integrar operaciones y digitalizar el manejo de
+              información empresarial con tecnologías modernas.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">🎯</div>
+            <h3>Planes de Recuperación Estratégica</h3>
+            <p>
+              Diseñamos e implementamos estrategias integrales de turnaround
+              para revertir situaciones críticas, estabilizar operaciones y
+              retomar el crecimiento sostenible del negocio.
+            </p>
+          </div>
+          <div class="service-card fade-in">
+            <div class="service-icon">📋</div>
+            <h3>Planificación Financiera Estratégica</h3>
+            <p>
+              Elaboramos presupuestos detallados, proyecciones financieras y
+              modelos de negocio que faciliten la planificación estratégica y el
+              acceso a financiamiento empresarial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section id="industrias" class="industries">
+      <div class="container">
+        <h2 class="section-title fade-in">Sectores de Especialización</h2>
+        <div class="industries-grid">
+          <div class="industry-card fade-in">
+            <div class="industry-icon">🧵</div>
+            <h3>Industria Textil</h3>
+            <p>
+              Optimización integral de procesos en confección, hilado, teñido y
+              acabados textiles con enfoque en eficiencia energética y reducción
+              de desperdicios
+            </p>
+          </div>
+          <div class="industry-card fade-in">
+            <div class="industry-icon">🏭</div>
+            <h3>Manufactura Avanzada</h3>
+            <p>
+              Implementación de Industry 4.0, lean manufacturing y mejora
+              continua en diversos sectores manufactureros para maximizar la
+              productividad
+            </p>
+          </div>
+          <div class="industry-card fade-in">
+            <div class="industry-icon">⚙️</div>
+            <h3>Sector Metal-Mecánico</h3>
+            <p>
+              Análisis especializado en procesos de mecanizado, soldadura,
+              fundición y metalurgia con optimización de tiempos y reducción de
+              costos operativos
+            </p>
+          </div>
+          <div class="industry-card fade-in">
+            <div class="industry-icon">🔩</div>
+            <h3>Otros Sectores Industriales</h3>
+            <p>
+              Adaptamos nuestros servicios especializados a las necesidades
+              específicas de cada industria, aplicando metodologías probadas y
+              tecnologías avanzadas
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="soluciones" class="solutions">
+      <div class="container">
+        <div class="solutions-container">
+          <div class="solutions-content">
+            <h2>Soluciones Integrales de Transformación</h2>
+            <ul class="solutions-list">
+              <li>
+                Diagnóstico empresarial exhaustivo con análisis de procesos
+                críticos
+              </li>
+              <li>
+                Identificación sistemática de desperdicios y oportunidades de
+                mejora
+              </li>
+              <li>
+                Implementación de metodologías Lean Manufacturing y Six Sigma
+              </li>
+              <li>Sistemas avanzados de control de calidad y trazabilidad</li>
+              <li>
+                Automatización inteligente de procesos operativos y
+                administrativos
+              </li>
+              <li>
+                Programas especializados de capacitación del personal técnico
+              </li>
+              <li>
+                Seguimiento continuo con KPIs en tiempo real y mejora iterativa
+              </li>
+              <li>
+                Desarrollo de software personalizado para gestión empresarial
+              </li>
+            </ul>
+          </div>
+          <div class="solutions-visual">
+            <h3>Resultados Comprobados en el Mercado</h3>
+            <div class="metric">
+              <div class="metric-number">35%</div>
+              <div>Reducción promedio de costos operativos</div>
+            </div>
+            <div class="metric">
+              <div class="metric-number">50%</div>
+              <div>Incremento en productividad empresarial</div>
+            </div>
+            <div class="metric">
+              <div class="metric-number">40%</div>
+              <div>Mejora en eficiencia de procesos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+      <div class="container">
+        <h2 class="section-title fade-in">
+          Inicia tu Transformación Empresarial
+        </h2>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="nombre">Nombre de la Empresa</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Ingresa el nombre de tu empresa"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="contacto">Persona de Contacto</label>
+            <input
+              type="text"
+              id="contacto"
+              name="contacto"
+              placeholder="Nombre completo y cargo"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="correo@tuempresa.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono de Contacto</label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              placeholder="+51 xxx xxx xxx"
+            />
+          </div>
+          <div class="form-group">
+            <label for="sector">Sector Industrial</label>
+            <input
+              type="text"
+              id="sector"
+              name="sector"
+              placeholder="Textil, Manufactura, Metal-mecánica, etc."
+            />
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Describe tu Desafío Empresarial</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              placeholder="Cuéntanos sobre los principales retos que enfrenta tu empresa y cómo nuestros servicios especializados pueden ayudarte a transformar tu organización..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">
+            Solicitar Consulta Gratuita Especializada
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; 2025 ProConsult. Especialistas en transformación empresarial,
+          optimización de procesos y soluciones industriales avanzadas.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      function toggleMobileMenu() {
+        const navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+      }
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          const headerHeight = document.querySelector(".header").offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+
+          // Close mobile menu if open
+          const navLinks = document.getElementById("navLinks");
+          navLinks.classList.remove("active");
+        });
+      });
+
+      // Form submission handling with enhanced validation
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const formData = new FormData(this);
+
+          // Validación básica en el frontend
+          const nombre = formData.get("nombre").trim();
+          const contacto = formData.get("contacto").trim();
+          const email = formData.get("email").trim();
+          const mensaje = formData.get("mensaje").trim();
+
+          if (!nombre || !contacto || !email || !mensaje) {
+            alert("Por favor completa todos los campos obligatorios.");
+            return;
+          }
+
+          // Email validation
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            alert("Por favor ingresa un correo electrónico válido.");
+            return;
+          }
+
+          // Elementos del formulario
+          const submitBtn = this.querySelector(".submit-btn");
+          const originalText = submitBtn.textContent;
+
+          // Estado de carga
+          submitBtn.classList.add("loading");
+          submitBtn.textContent = "Enviando consulta...";
+          submitBtn.disabled = true;
+
+          // Enviar datos al servidor
+          fetch("api/procesar_contacto.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                alert(
+                  "¡Excelente! Hemos recibido tu consulta. Nuestro equipo de especialistas te contactará en las próximas 24 horas para agendar una reunión inicial gratuita y evaluar las oportunidades de mejora en tu empresa."
+                );
+                this.reset();
+              } else {
+                alert("Error: " + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert(
+                "Hubo un error al enviar tu consulta. Por favor intenta nuevamente."
+              );
+            })
+            .finally(() => {
+              // Restaurar botón
+              submitBtn.classList.remove("loading");
+              submitBtn.textContent = originalText;
+              submitBtn.disabled = false;
+            });
+        });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in elements
+      document.querySelectorAll(".fade-in").forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Counter animation for metrics with enhanced effects
+      function animateCounter(element, target, duration = 2500) {
+        let start = 0;
+        const increment = target / (duration / 16);
+
+        function updateCounter() {
+          start += increment;
+          if (start < target) {
+            element.textContent = Math.floor(start) + "%";
+            requestAnimationFrame(updateCounter);
+          } else {
+            element.textContent = target + "%";
+          }
+        }
+        updateCounter();
+      }
+
+      // Trigger counter animations when metrics come into view
+      const metricsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const number = entry.target.querySelector(".metric-number");
+            const value = parseInt(number.textContent);
+            setTimeout(() => {
+              animateCounter(number, value);
+            }, 500);
+            metricsObserver.unobserve(entry.target);
+          }
+        });
+      });
+
+      document.querySelectorAll(".metric").forEach((metric) => {
+        metricsObserver.observe(metric);
+      });
+
+      // Dynamic floating particles for hero section
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.width = Math.random() * 4 + 2 + "px";
+        particle.style.height = particle.style.width;
+        particle.style.animationDuration = Math.random() * 3 + 4 + "s";
+        particle.style.animationDelay = Math.random() * 2 + "s";
+
+        document.querySelector(".hero").appendChild(particle);
+
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.remove();
+          }
+        }, 6000);
+      }
+
+      // Create particles periodically
+      setInterval(createParticle, 800);
+
+      // Header background opacity on scroll
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector(".header");
+        const scrolled = window.pageYOffset;
+        const opacity = Math.min(scrolled / 100, 1);
+        header.style.background = `linear-gradient(135deg, 
+                rgba(15, 23, 42, ${0.9 + opacity * 0.1}) 0%, 
+                rgba(30, 58, 138, ${0.9 + opacity * 0.1}) 50%, 
+                rgba(30, 64, 175, ${0.9 + opacity * 0.1}) 100%)`;
+      });
+
+      // Enhanced form field focus effects
+      document
+        .querySelectorAll(".form-group input, .form-group textarea")
+        .forEach((field) => {
+          field.addEventListener("focus", function () {
+            this.parentElement.style.transform = "scale(1.02)";
+            this.parentElement.style.transition = "transform 0.3s ease";
+          });
+
+          field.addEventListener("blur", function () {
+            this.parentElement.style.transform = "scale(1)";
+          });
+        });
+
+      // Service card hover sound effect simulation
+      document
+        .querySelectorAll(".service-card, .industry-card")
+        .forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-15px) scale(1.02)";
+            this.style.transition = "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0) scale(1)";
+          });
+        });
+
+      // Initialize animations on page load
+      window.addEventListener("load", () => {
+        // Add a subtle entrance animation to the whole page
+        document.body.style.opacity = "0";
+        document.body.style.transition = "opacity 0.8s ease";
+        setTimeout(() => {
+          document.body.style.opacity = "1";
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
